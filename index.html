@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>A Bouquet For You 💐</title>
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>For You ❤️</title>
 
 <style>
 
@@ -12,859 +16,500 @@
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
+
     margin: 0;
+
     width: 100%;
     height: 100%;
+
     overflow: hidden;
+
     background: #000;
 }
 
 body {
+
     display: flex;
-    align-items: center;
+
     justify-content: center;
-    font-family: Georgia, serif;
-    color: white;
+    align-items: center;
+
+    font-family: Arial, sans-serif;
 }
 
-.screen {
-    width: min(100vw, 700px);
+canvas {
+
+    width: 100vw;
     height: 100vh;
-    min-height: 650px;
-    position: relative;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: block;
 }
 
+.message {
 
-/* ---------------- TITLE ---------------- */
-
-.title {
     position: absolute;
-    top: 28px;
-    left: 0;
+
+    bottom: 35px;
 
     width: 100%;
+
+    padding: 0 20px;
+
     text-align: center;
 
-    font-size: clamp(18px, 4vw, 25px);
+    color: #ffb6c9;
+
+    font-family: Georgia, serif;
+
+    font-size: 18px;
+
+    line-height: 1.5;
+
     letter-spacing: 1px;
 
     opacity: 0;
 
-    animation: fadeIn 1.2s forwards;
-}
+    transition: opacity 2s ease;
 
-.title span {
-    color: #ff6b9d;
-}
-
-
-/* ---------------- SVG ---------------- */
-
-svg {
-    width: 96%;
-    max-height: 88vh;
-    overflow: visible;
-}
-
-
-/* ---------------- DRAWING ANIMATION ---------------- */
-
-.draw {
-
-    fill: none;
-
-    stroke-linecap: round;
-    stroke-linejoin: round;
-
-    stroke-dasharray: 2000;
-    stroke-dashoffset: 2000;
-
-    animation: draw 2s ease forwards;
-}
-
-.slow {
-    animation-duration: 2.8s;
-}
-
-.medium {
-    animation-duration: 2s;
-}
-
-.fast {
-    animation-duration: 1.3s;
-}
-
-
-/* ---------------- FLOWER BLOOM ---------------- */
-
-.flower-fill {
-
-    opacity: 0;
-
-    animation:
-        bloom .8s ease forwards;
-}
-
-
-/* ---------------- GLOW ---------------- */
-
-.glow {
-
-    filter:
-        drop-shadow(0 0 5px currentColor);
-}
-
-
-/* ---------------- FINAL MESSAGE ---------------- */
-
-#final {
-
-    opacity: 0;
-
-    animation:
-        finalText 1.5s ease forwards;
-
-    animation-delay: 12.5s;
-}
-
-
-/* ---------------- FLOATING HEARTS ---------------- */
-
-.heart {
-
-    position: absolute;
-
-    bottom: -30px;
-
-    font-size: 20px;
-
-    opacity: 0;
-
-    animation:
-        floatUp 5s linear infinite;
-}
-
-
-/* ---------------- ANIMATIONS ---------------- */
-
-@keyframes draw {
-
-    to {
-        stroke-dashoffset: 0;
-    }
+    pointer-events: none;
 
 }
 
+.message.show {
 
-@keyframes bloom {
-
-    to {
-        opacity: 1;
-    }
-
-}
-
-
-@keyframes fadeIn {
-
-    to {
-        opacity: .9;
-    }
-
-}
-
-
-@keyframes finalText {
-
-    to {
-        opacity: 1;
-    }
-
-}
-
-
-@keyframes floatUp {
-
-    0% {
-
-        transform:
-            translateY(0)
-            scale(.7);
-
-        opacity: 0;
-    }
-
-    15% {
-
-        opacity: .8;
-    }
-
-    100% {
-
-        transform:
-            translateY(-100vh)
-            scale(1.3);
-
-        opacity: 0;
-    }
-
-}
-
-
-/* ---------------- MOBILE ---------------- */
-
-@media (max-width: 500px) {
-
-    .screen {
-        min-height: 100vh;
-    }
-
-    svg {
-        width: 105%;
-    }
+    opacity: 1;
 
 }
 
 </style>
+
 </head>
 
 
 <body>
 
 
-<div class="screen">
+<canvas id="heartCanvas"></canvas>
 
 
-    <!-- TOP MESSAGE -->
+<!-- FINAL MESSAGE -->
 
-    <div class="title">
+<div id="message" class="message">
 
-        Drawing something beautiful for you...
-
-        <span>♥</span>
-
-    </div>
-
-
-
-    <!-- ========================= -->
-    <!--       BOUQUET SVG          -->
-    <!-- ========================= -->
-
-    <svg
-        viewBox="0 0 700 850"
-        aria-label="A bouquet being drawn flower by flower"
-    >
-
-
-        <!-- ================= -->
-        <!-- STEMS              -->
-        <!-- ================= -->
-
-        <g
-            stroke="#63a96b"
-            stroke-width="5"
-        >
-
-            <path
-                class="draw slow"
-                style="animation-delay:1s"
-                d="M350 750
-                   C350 610 330 470 300 270"
-            />
-
-
-            <path
-                class="draw slow"
-                style="animation-delay:1.4s"
-                d="M350 750
-                   C360 590 410 430 470 210"
-            />
-
-
-            <path
-                class="draw medium"
-                style="animation-delay:2s"
-                d="M350 750
-                   C330 600 230 450 170 300"
-            />
-
-
-            <path
-                class="draw medium"
-                style="animation-delay:2.3s"
-                d="M350 750
-                   C390 590 520 430 570 300"
-            />
-
-
-            <path
-                class="draw fast"
-                style="animation-delay:2.7s"
-                d="M350 750
-                   C350 600 350 460 350 250"
-            />
-
-        </g>
-
-
-
-        <!-- ================= -->
-        <!-- LEAVES             -->
-        <!-- ================= -->
-
-        <g
-            stroke="#78bd7b"
-            stroke-width="4"
-        >
-
-            <path
-                class="draw fast"
-                style="animation-delay:3s"
-                d="M285 520
-                   C230 480 190 500 170 540
-                   C220 550 260 545 285 520Z"
-            />
-
-
-            <path
-                class="draw fast"
-                style="animation-delay:3.2s"
-                d="M410 520
-                   C470 480 520 500 535 540
-                   C485 550 445 545 410 520Z"
-            />
-
-
-            <path
-                class="draw fast"
-                style="animation-delay:3.4s"
-                d="M285 420
-                   C235 390 210 350 220 320
-                   C260 340 285 375 285 420Z"
-            />
-
-
-            <path
-                class="draw fast"
-                style="animation-delay:3.6s"
-                d="M425 420
-                   C475 385 505 345 500 310
-                   C455 335 430 375 425 420Z"
-            />
-
-
-            <path
-                class="draw fast"
-                style="animation-delay:3.8s"
-                d="M335 570
-                   C285 550 255 565 245 595
-                   C285 600 315 590 335 570Z"
-            />
-
-
-            <path
-                class="draw fast"
-                style="animation-delay:4s"
-                d="M375 570
-                   C425 550 455 565 465 595
-                   C425 600 395 590 375 570Z"
-            />
-
-        </g>
-
-
-
-        <!-- ========================== -->
-        <!-- BIG CENTRAL PINK FLOWER     -->
-        <!-- ========================== -->
-
-        <g
-            class="glow"
-            color="#ff7fae"
-            stroke="#ff8fb6"
-            stroke-width="5"
-        >
-
-            <path
-                class="draw slow"
-                style="animation-delay:4.2s"
-                d="M350 320
-                   C290 285 280 230 320 205
-                   C350 185 365 220 350 250
-                   C335 215 380 180 405 215
-                   C430 250 400 285 350 320Z"
-            />
-
-
-            <path
-                class="draw slow"
-                style="animation-delay:4.7s"
-                d="M350 320
-                   C300 350 260 330 270 290
-                   C280 255 320 270 345 295
-                   C310 270 325 225 360 240
-                   C395 255 390 300 350 320Z"
-            />
-
-
-            <path
-                class="draw slow"
-                style="animation-delay:5.1s"
-                d="M350 320
-                   C400 350 440 330 430 290
-                   C420 255 380 270 355 295
-                   C390 270 375 225 340 240
-                   C305 255 310 300 350 320Z"
-            />
-
-
-            <circle
-                class="flower-fill"
-                style="animation-delay:5.5s"
-                cx="350"
-                cy="285"
-                r="22"
-                fill="#ffd36b"
-                stroke="#ffd36b"
-            />
-
-        </g>
-
-
-
-        <!-- ================= -->
-        <!-- LEFT RED ROSE      -->
-        <!-- ================= -->
-
-        <g
-            class="glow"
-            color="#ff385f"
-            stroke="#ff405f"
-            stroke-width="5"
-        >
-
-            <path
-                class="draw slow"
-                style="animation-delay:5.6s"
-                d="M235 330
-                   C180 300 170 250 205 225
-                   C240 200 270 225 265 255
-                   C290 220 330 245 320 280
-                   C310 320 270 335 235 330Z"
-            />
-
-
-            <path
-                class="draw medium"
-                style="animation-delay:6.2s"
-                d="M215 270
-                   C230 245 270 245 280 270
-                   C265 260 250 275 250 290
-                   C240 275 225 280 215 270Z"
-            />
-
-
-            <path
-                class="draw medium"
-                style="animation-delay:6.5s"
-                d="M230 300
-                   C250 280 270 285 280 305"
-            />
-
-        </g>
-
-
-
-        <!-- ================= -->
-        <!-- RIGHT RED ROSE     -->
-        <!-- ================= -->
-
-        <g
-            class="glow"
-            color="#ff405f"
-            stroke="#ff405f"
-            stroke-width="5"
-        >
-
-            <path
-                class="draw slow"
-                style="animation-delay:6.3s"
-                d="M465 345
-                   C420 315 415 270 445 245
-                   C475 220 505 240 500 270
-                   C525 240 555 265 548 300
-                   C540 335 505 350 465 345Z"
-            />
-
-
-            <path
-                class="draw medium"
-                style="animation-delay:6.8s"
-                d="M450 285
-                   C465 260 495 260 510 285
-                   C490 275 475 290 478 305
-                   C465 292 458 295 450 285Z"
-            />
-
-        </g>
-
-
-
-        <!-- ================= -->
-        <!-- PURPLE FLOWERS     -->
-        <!-- ================= -->
-
-        <g
-            class="glow"
-            color="#bd79ff"
-            stroke="#bd79ff"
-            stroke-width="4"
-        >
-
-            <g
-                class="draw fast"
-                style="animation-delay:7.1s"
-            >
-
-                <circle cx="155" cy="390" r="20"/>
-                <circle cx="155" cy="390" r="8"/>
-
-                <path d="M155 370v-35"/>
-                <path d="M155 410v35"/>
-
-            </g>
-
-
-            <g
-                class="draw fast"
-                style="animation-delay:7.4s"
-            >
-
-                <circle cx="545" cy="400" r="20"/>
-                <circle cx="545" cy="400" r="8"/>
-
-                <path d="M545 380v-35"/>
-                <path d="M545 420v35"/>
-
-            </g>
-
-
-            <g
-                class="draw fast"
-                style="animation-delay:7.7s"
-            >
-
-                <circle cx="250" cy="180" r="18"/>
-                <circle cx="250" cy="180" r="7"/>
-
-                <path d="M250 162v-35"/>
-
-            </g>
-
-
-            <g
-                class="draw fast"
-                style="animation-delay:8s"
-            >
-
-                <circle cx="450" cy="175" r="18"/>
-                <circle cx="450" cy="175" r="7"/>
-
-                <path d="M450 157v-35"/>
-
-            </g>
-
-        </g>
-
-
-
-        <!-- ================= -->
-        <!-- YELLOW FLOWERS     -->
-        <!-- ================= -->
-
-        <g
-            class="glow"
-            color="#ffd45a"
-            stroke="#ffd45a"
-            stroke-width="4"
-        >
-
-            <g
-                class="draw fast"
-                style="animation-delay:8.3s"
-            >
-
-                <circle cx="180" cy="300" r="13"/>
-                <circle cx="180" cy="300" r="5"/>
-
-                <path d="M180 287v-20"/>
-                <path d="M180 313v20"/>
-
-            </g>
-
-
-            <g
-                class="draw fast"
-                style="animation-delay:8.6s"
-            >
-
-                <circle cx="520" cy="300" r="13"/>
-                <circle cx="520" cy="300" r="5"/>
-
-                <path d="M520 287v-20"/>
-                <path d="M520 313v20"/>
-
-            </g>
-
-
-            <g
-                class="draw fast"
-                style="animation-delay:8.9s"
-            >
-
-                <circle cx="290" cy="120" r="12"/>
-                <circle cx="290" cy="120" r="4"/>
-
-            </g>
-
-
-            <g
-                class="draw fast"
-                style="animation-delay:9.1s"
-            >
-
-                <circle cx="410" cy="120" r="12"/>
-                <circle cx="410" cy="120" r="4"/>
-
-            </g>
-
-        </g>
-
-
-
-        <!-- ================= -->
-        <!-- SMALL FLOWERS      -->
-        <!-- ================= -->
-
-        <g
-            stroke="#fff0f5"
-            stroke-width="3"
-            fill="none"
-        >
-
-            <path
-                class="draw fast"
-                style="animation-delay:9.3s"
-                d="M120 470
-                   C145 440 160 420 180 395
-                   M580 470
-                   C555 440 540 420 520 395"
-            />
-
-
-            <path
-                class="draw fast"
-                style="animation-delay:9.5s"
-                d="M125 455l-10-10
-                   M140 435l-10-10
-                   M560 455l10-10
-                   M545 435l10-10"
-            />
-
-
-            <circle
-                class="flower-fill"
-                style="animation-delay:9.7s"
-                cx="115"
-                cy="442"
-                r="5"
-                fill="#fff0f5"
-            />
-
-
-            <circle
-                class="flower-fill"
-                style="animation-delay:9.8s"
-                cx="130"
-                cy="420"
-                r="5"
-                fill="#fff0f5"
-            />
-
-
-            <circle
-                class="flower-fill"
-                style="animation-delay:9.9s"
-                cx="585"
-                cy="442"
-                r="5"
-                fill="#fff0f5"
-            />
-
-
-            <circle
-                class="flower-fill"
-                style="animation-delay:10s"
-                cx="570"
-                cy="420"
-                r="5"
-                fill="#fff0f5"
-            />
-
-        </g>
-
-
-
-        <!-- ================= -->
-        <!-- WRAPPING PAPER     -->
-        <!-- ================= -->
-
-        <g
-            stroke="#dca5bc"
-            stroke-width="5"
-        >
-
-            <path
-                class="draw slow"
-                style="animation-delay:10.2s"
-                d="M145 510
-                   L555 510
-                   L475 735
-                   L350 680
-                   L225 735
-                   Z"
-            />
-
-
-            <path
-                class="draw medium"
-                style="animation-delay:10.7s"
-                d="M145 510
-                   L350 600
-                   L555 510"
-            />
-
-
-            <path
-                class="draw medium"
-                style="animation-delay:11s"
-                d="M350 600
-                   L350 760"
-            />
-
-        </g>
-
-
-
-        <!-- ================= -->
-        <!-- RIBBON             -->
-        <!-- ================= -->
-
-        <g
-            stroke="#ff729d"
-            stroke-width="5"
-            fill="none"
-            class="glow"
-            color="#ff729d"
-        >
-
-            <path
-                class="draw medium"
-                style="animation-delay:11.2s"
-                d="M350 690
-                   C310 665 275 685 295 715
-                   C315 740 340 720 350 705"
-            />
-
-
-            <path
-                class="draw medium"
-                style="animation-delay:11.4s"
-                d="M350 690
-                   C390 665 425 685 405 715
-                   C385 740 360 720 350 705"
-            />
-
-
-            <circle
-                class="flower-fill"
-                style="animation-delay:11.6s"
-                cx="350"
-                cy="700"
-                r="13"
-                fill="#ff729d"
-            />
-
-        </g>
-
-    </svg>
-
-
-
-    <!-- ================= -->
-    <!-- FINAL MESSAGE      -->
-    <!-- ================= -->
-
-    <div
-        id="final"
-        class="title"
-        style="top:auto;bottom:28px"
-    >
-
-        And somehow...
-        it still doesn't look as beautiful as you. 💐
-
-    </div>
+    Every little "I love you" was meant for you. ❤️
 
 </div>
 
 
-
 <script>
 
+
+/* =========================================
+   CANVAS SETUP
+========================================= */
+
+const canvas =
+    document.getElementById("heartCanvas");
+
+const ctx =
+    canvas.getContext("2d");
+
+const message =
+    document.getElementById("message");
+
+
+function resizeCanvas() {
+
+    const dpr =
+        window.devicePixelRatio || 1;
+
+    canvas.width =
+        window.innerWidth * dpr;
+
+    canvas.height =
+        window.innerHeight * dpr;
+
+    canvas.style.width =
+        window.innerWidth + "px";
+
+    canvas.style.height =
+        window.innerHeight + "px";
+
+    ctx.setTransform(
+        dpr,
+        0,
+        0,
+        dpr,
+        0,
+        0
+    );
+}
+
+
+resizeCanvas();
+
+
+window.addEventListener(
+    "resize",
+    resizeCanvas
+);
+
+
+/* =========================================
+   SETTINGS
+========================================= */
+
+
 /*
-    Add floating hearts after
-    the bouquet is almost finished.
+   This is the text that forms the heart.
 */
 
-setTimeout(() => {
+const text =
+    "I love you";
 
-    for (let i = 0; i < 12; i++) {
 
-        const heart =
-            document.createElement("div");
+/*
+   Size of each "I love you".
+*/
 
-        heart.className = "heart";
+const fontSize =
+    8;
 
-        heart.textContent =
-            ["♥", "♡", "✦"][i % 3];
 
-        heart.style.left =
-            (5 + Math.random() * 90) + "%";
+/*
+   Color of the words.
+*/
 
-        heart.style.animationDelay =
-            (Math.random() * 3) + "s";
+const color =
+    "#ffb6c9";
 
-        heart.style.color =
-            i % 2
-                ? "#ff7fae"
-                : "#ffffff";
 
-        document
-            .querySelector(".screen")
-            .appendChild(heart);
+/*
+   Create lots of points
+   to make the heart dense.
+*/
+
+const points = [];
+
+
+/* =========================================
+   HEART FORMULA
+========================================= */
+
+function heartPoint(t, scale) {
+
+    const x =
+        16 *
+        Math.pow(
+            Math.sin(t),
+            3
+        );
+
+
+    const y =
+        13 *
+        Math.cos(t)
+
+        - 5 *
+        Math.cos(2 * t)
+
+        - 2 *
+        Math.cos(3 * t)
+
+        - Math.cos(4 * t);
+
+
+    return {
+
+        x: x * scale,
+
+        y: -y * scale
+
+    };
+
+}
+
+
+/* =========================================
+   CREATE HEART
+========================================= */
+
+
+/*
+   Multiple layers make the heart
+   thicker and more detailed.
+*/
+
+for (
+    let layer = 0;
+    layer < 17;
+    layer++
+) {
+
+    const scale =
+        11 + layer * 0.38;
+
+
+    for (
+        let i = 0;
+        i < 120;
+        i++
+    ) {
+
+        const angle =
+            i *
+            (Math.PI * 2 / 120);
+
+
+        const point =
+            heartPoint(
+                angle,
+                scale
+            );
+
+
+        /*
+           Small randomness gives
+           the heart a natural look.
+        */
+
+        point.x +=
+            (Math.random() - 0.5) * 2;
+
+
+        point.y +=
+            (Math.random() - 0.5) * 2;
+
+
+        points.push(point);
+
     }
 
-}, 9000);
+}
+
+
+/* =========================================
+   SHUFFLE
+========================================= */
+
+function shuffle(array) {
+
+    for (
+        let i = array.length - 1;
+        i > 0;
+        i--
+    ) {
+
+        const j =
+            Math.floor(
+                Math.random() * (i + 1)
+            );
+
+
+        [
+            array[i],
+            array[j]
+        ] =
+        [
+            array[j],
+            array[i]
+        ];
+
+    }
+
+}
+
+
+shuffle(points);
+
+
+/* =========================================
+   ANIMATION
+========================================= */
+
+
+let currentPoint = 0;
+
+
+/*
+   Increase this number if you want
+   the heart to appear faster.
+
+   Lower number = slower drawing.
+*/
+
+const speed = 7;
+
+
+function animate() {
+
+
+    /*
+       Clear screen.
+    */
+
+    ctx.clearRect(
+        0,
+        0,
+        window.innerWidth,
+        window.innerHeight
+    );
+
+
+    /*
+       Center of screen.
+    */
+
+    const centerX =
+        window.innerWidth / 2;
+
+
+    const centerY =
+        window.innerHeight / 2;
+
+
+    /*
+       Automatically resize heart
+       depending on phone screen.
+    */
+
+    const scaleFactor =
+        Math.min(
+
+            window.innerWidth / 650,
+
+            window.innerHeight / 800
+
+        );
+
+
+    ctx.save();
+
+
+    ctx.translate(
+        centerX,
+        centerY
+    );
+
+
+    ctx.scale(
+        scaleFactor,
+        scaleFactor
+    );
+
+
+    /*
+       Text styling.
+    */
+
+    ctx.fillStyle =
+        color;
+
+
+    ctx.font =
+        `bold ${fontSize}px Arial`;
+
+
+    ctx.textAlign =
+        "center";
+
+
+    ctx.textBaseline =
+        "middle";
+
+
+    /*
+       Create new words.
+    */
+
+    for (
+        let i = 0;
+
+        i < speed;
+
+        i++
+    ) {
+
+        if (
+            currentPoint >=
+            points.length
+        ) {
+
+            break;
+
+        }
+
+
+        currentPoint++;
+
+    }
+
+
+    /*
+       Draw all created words.
+    */
+
+    for (
+        let i = 0;
+
+        i < currentPoint;
+
+        i++
+    ) {
+
+        const p =
+            points[i];
+
+
+        ctx.fillText(
+
+            text,
+
+            p.x,
+
+            p.y
+
+        );
+
+    }
+
+
+    ctx.restore();
+
+
+    /*
+       Show final message
+       after heart is complete.
+    */
+
+    if (
+        currentPoint >=
+        points.length
+    ) {
+
+        message.classList.add(
+            "show"
+        );
+
+    }
+
+
+    requestAnimationFrame(
+        animate
+    );
+
+}
+
+
+requestAnimationFrame(
+    animate
+);
+
 
 </script>
 
-
 </body>
+
 </html>
